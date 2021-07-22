@@ -26,6 +26,8 @@
 
 `+`  버튼을 눌러 SQLite를 실행해 준다
 
+![화면 캡처 2021-07-22 084445](https://user-images.githubusercontent.com/83646543/126586896-b0f3ce12-d8e6-44e9-9d85-10eb07a3a6b0.jpg)
+
 DB Navigator-Settings -> Database files 경로설정
 
 1. sqlite.db 를 클릭하면 오른쪽 ... 생기고 이 부분을 클릭 하면 어느 위치의 db.sqlite3에 적용할 것인지
@@ -35,6 +37,7 @@ DB Navigator-Settings -> Database files 경로설정
 2. Test connection 을 한다 이때 팝업으로 was successful 나오면 ok
 3. ok 하면 연결 완료 
 
+![화면 캡처 2021-07-22 084923](https://user-images.githubusercontent.com/83646543/126586902-3ca68f5f-6e27-4a25-9136-f878bf31dfa1.jpg)
 
 
 **DB browser**
