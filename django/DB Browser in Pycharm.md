@@ -28,6 +28,8 @@
 
 ![화면 캡처 2021-07-22 084445](https://user-images.githubusercontent.com/83646543/126586896-b0f3ce12-d8e6-44e9-9d85-10eb07a3a6b0.jpg)
 
+![](%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202021-07-22%20084445.jpg)
+
 DB Navigator-Settings -> Database files 경로설정
 
 1. sqlite.db 를 클릭하면 오른쪽 ... 생기고 이 부분을 클릭 하면 어느 위치의 db.sqlite3에 적용할 것인지
@@ -38,7 +40,7 @@ DB Navigator-Settings -> Database files 경로설정
 3. ok 하면 연결 완료 
 
 ![화면 캡처 2021-07-22 084923](https://user-images.githubusercontent.com/83646543/126586902-3ca68f5f-6e27-4a25-9136-f878bf31dfa1.jpg)
-
+![](%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202021-07-22%20084923.jpg)
 
 **DB browser**
 
