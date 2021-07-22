@@ -397,3 +397,212 @@ jupyter notebook --port=7777
 
 
 
+# web server
+
+
+
+## 요청테그에 대해 배워봅시다.
+
+브라우저에 요청 하는 테그이다.
+
+1. a테그 `<a href=""></a`
+
+2. form 테그  `<form action=""></form>`
+
+3. ajax 테그
+
+   
+
+
+
+## 준비
+
+web_config-> urls.py
+
+```python
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('home',views.index),
+    path('',views.index),
+    path('index02',views.index02),
+
+#웹서버에 값 던지기
+]
+```
+
+
+
+home->views.py 사용할 변수 index02,index
+
+```python
+from django.shortcuts import render
+
+# Create your views here.
+
+from django.http import HttpResponse
+
+def index(request):
+    path=request.path
+    resultstr=''
+    if path =='/home':
+        resultstr='<h1>여기는 home 입니다.</h1>'
+    else:
+        resultstr= '<h1>여기는 김주희 입니다.</h1>'
+    return HttpResponse(resultstr)
+
+def index02(request):
+
+    return render(request,'index_copy.html')
+```
+
+
+
+templates->index_copy.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>여기는 index_copy입니다 </h1>
+    <a href=""></a>
+    <form action=""></form>
+</body>
+</html>
+```
+
+
+
+manage.py 디버깅 스타트
+
+
+
+
+
+## 테그의 동작 
+
+## a 테그 : url만 사용하고 싶을 때 사용
+
+templates->index_copy.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>여기는 index_copy입니다 </h1>
+    <a href="home">홈페이지로 이동</a>    
+</body>
+</html>
+```
+
+
+
+### form 테그: url 뿐 아니라 세부적인 값을 사용 하고 싶을때 사용
+
+templates->index_copy.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>여기는 index_copy입니다 </h1>    
+    <a href="home">홈페이지로 이동</a>
+    <form action="/home">
+        <input type="text" name="first">
+        <input type="text" name="second">
+        <input type="text" name="third">
+        <input type="submit" name="press">
+    </form>
+<!--form은 submit있어야만 동작-->
+</body>
+</html>
+```
+
+
+
+### 인풋에 넣은 값을 리퀘스트에 담기 
+
+name이 구분자가 되는데 이건 리퀘스트와 인풋 연결로 쓰인다 
+
+
+
+웹브라우저에서 넣은 값이 잘 들어왔는지 확인하려면 
+
+Debug console`>>>` **request.GET['first','second','third']** 
+
+입력값 	`첫번째, two , 세번째`	 확인가능 
+
+
+
+db, excel에 연결해서 렌더링으로 넘겨서 쓸 수 있다. 
+
+
+
+## 한페이지에 해당부분 달리 사용하려면 form문을 따로써주면 됨
+
+### 검색창
+
+url-> 서치
+
+### 입력창
+
+url->인서트 
+
+
+
+```html
+<h2>검색창</h2>
+    <form action="/home">
+        <input type="text" name="search">
+        <input type="submit" name="press">
+    </form>
+<!--form은 submit있어야만 동작-->
+    <h2>입력창</h2>
+    <form action="index01">
+        <input type="text" name="first">
+        <input type="text" name="second">
+        <input type="text" name="third">
+        <input type="submit" name="press">
+    </form>
+```
+
+
+
+
+
+## method 설정
+
+get 변수의 값을 누구나 다보게하는(form은 기본이 get으로 되있음 )
+
+post 변수의 값을 못보게 할 경우는 보안설정해줘야한다.
+
+보안: `{% csrf_token %}`  설정해주면 페이지 열릴때마다 키 번호 바뀜
+
+```python
+h2>입력창</h2>
+    <form action="/index01" method="post">
+        {% csrf_token %}
+        <input type="text" name="first">
+        <input type="text" name="second">
+        <input type="text" name="third">
+        <input type="submit" name="press">
+    </form>
+```
+
+
+
+웹브라우저에서 보내준 값 못보게 하려면 
+
+Debug console`>>>`**request.POST['second']**
+
