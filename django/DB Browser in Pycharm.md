@@ -715,6 +715,28 @@ templates-> board->list.html
 ```
 
 
+# db.sqlite3 파이참에서 커밋 푸시<br>
+db.sqlite3 정리해서 푸시하려는데 깃에 올라와있는 싱크와 안맞아서 충돌날 경우<br>
+dbbrowser에서 disconnection 시키고 `+`sqlite를 만든다  <br>
+경로는 새로 만든 db_06.sqlite3선택  <br>
+connection활성화 시키고 console및 connection1을 더블클릭 <br>
+셀렉트문 만듬  <br>
+
+```
+insert into dbapp_economic (
+    id,
+    create_date,
+    href,
+    title)
+values (
+    ':id',
+    ':create_date',
+    ':href',
+    ':title')
+;
+```
+
+재생 후 커밋푸시
 
 
 
