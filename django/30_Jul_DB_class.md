@@ -1,0 +1,761 @@
+
+
+# Relational DataBases 
+
+필요에 의한 발전 
+
+Variable(변수)-> List or Dictionary(묶음)-> Small Text File(파일)->
+
+Excel (계산 파일)-> DB(큰 용량 파일)->Distributed system(나누어 파일 관리 )
+
+
+
+관계성이 명확 할 때 사용한다(a값이 명확  = b의 값도 명확)
+
+업무처리를 위해 나옴
+
+행과열이 있으나 table(엑셀의 sheets와 같다)이 나누어져있음 
+
+데이터 베이스가 나온 경로는 csv가 초기 모델
+
+
+
+따로 공부하기 : 노 에스큐엘/ 스파크
+
+참고:  레귤러 익스프레션: 자연어 처리 때 사용할건데 중요해
+
+​		    대문자 D로 시작해서 소문자 d 로 끝나는 값을 찾고 싶을 때  사용함
+
+
+
+* 진행방식 
+
+= 엑셀은 시트 추가할때  
+
+ `+`누르고 / 이름더블클릭해서  <u>시트에 이름을</u> 넣어준다. /<u>컬럼 지정해서 이름을</u> 넣어준다
+
+
+
+= RDB에 테이블을 만드는 과정
+
+creat table만들고/ table에  이름을 지정해준다 / table은 column 만들때 data type(나는 몇자를 넣어줄거야 라고 )을 명기해 준다. (자원을 잘 활용하기 위해 데이터 타입을 넣어주는 것)
+
+
+
+test_django의 db.sqlite3가져와서 쓰기(루트에 붙혀넣기)
+
+
+
+db browser에 연결 [db 만드는 회사 Oracle/ MySQL / PostgreSQL /SQlite]
+
+`<엑셀 만들기>`
+
+sheets 이름 : information
+
+컬럼A : id
+
+컬럼B : name
+
+|      | A    | B      |
+| ---- | ---- | ------ |
+| 1    | 1    | 홍길동 |
+| 2    | 2    | 장길산 |
+| 3    | 2    | 장길산 |
+| 4    |      | 정몽길 |
+
+
+
+### 테이블 생성 및 값 넣기, 삭제하기 
+
+`<db 만들기>`
+
+create table : information
+
+table(컬럼들은) : 괄호 안에 넣는다
+
+테이블의 데이터 타입을 명기(text) 해줘야한다
+
+```
+create table information(
+    id text,
+    name text
+);
+```
+
+플레이 버튼 누르면 information이 생성이 된다
+
+
+
+- 연동할때 
+
+class 이름 information
+
+변수이름이 컬럼 id, 컬럼 name
+
+
+
+쿼리문을 쓸 때는 어디까지 실행하라는 구분자가 필요하다 그래서 끝나는 부분에 세미콜론; 찍어줌으로 마감함
+
+
+
+* 값을 넣어줄 때(어떤 테이블(컬럼)에 어떤 데이터가 들어가는지 맵핑을 해줘야해)
+
+insert into 어디에 집어넣어라 라는 의미 
+
+values 값 을 넣는데 이 데이터 타입이  문자는 싱글코테이션 '  '으로 알려준다.
+
+``` 
+insert into information(id,name) 
+    values ('1','홍길동');
+```
+
+
+
+values 에 name먼저 넣고, id넣는 방법(맵핑)
+
+넘버는 싱글코테이션 안해줘도 넣을 수 있다
+
+```
+insert into information(name,id)
+    values ('장길산', 2);
+```
+
+
+
+컬럼중에 id는 안넣고 name만 넣는 방법
+
+```
+insert into information(name)
+    values('정몽길');
+```
+
+
+
+* 이제까지 넣은 테이블 내용 확인하고 싶을 때는 select사용한다
+
+어디에 있는 어떤 테이블을 볼꺼야?
+
+```
+select id, name from information;
+```
+
+결과
+
+|      |  A   | B      |
+| ---- | :--: | ------ |
+| 1    |  1   | 홍길동 |
+| 2    |  2   | 장길산 |
+| 3    |  2   | 장길산 |
+| 4    |      | 정몽길 |
+| 5    |  4   | 비망록 |
+
+
+
+[sqlite 홈페이지](https://www.sqlite.org/lang.html) DELETE/ INSERT/ SELECT/ UPDATE
+
+| Expression Affinity | Column Declared Type |
+| :------------------ | :------------------- |
+| TEXT 문자(varchar)  | "TEXT"               |
+| NUMERIC             | "NUM"                |
+| INTEGER 상수        | "INT"                |
+| REAL 실수(float)    | "REAL"               |
+| BLOB (a.k.a "NONE") | "" (empty string)    |
+
+
+
+###  WHERE (SELECT ,DELETE, UPDATE)
+
+### - SELECT
+
+#### 중요!
+
+**데이터 가 없을땐 `is null``is not null` 쓰면 된다**
+
+**데이터 타입 이 문자일 땐  `=` 와 `!` , `like` 쓴다고 생각하면 된다** 
+
+**데이터 타입 이 숫자일 땐  `=``<``>` 크거나 작거나 같거나 등 쓰면된다** 
+
+
+
+* id가 2 인 부분들만 가져오고 싶을땐 where 사용하기(엑셀의 필터기능과 같다)
+
+```
+select id, name from information where id = '2';
+```
+결과
+
+| id   | name   |
+| ---- | ------ |
+| 2    | 장길산 |
+| 2    | 장길산 |
+
+
+
+id 값이 2가 아닌 것만 가져온다 (where조건에서 null은 값으로쳐주지 않는다)
+
+```
+select id, name from information where id != '2';
+```
+
+| id   | name   |
+| ---- | ------ |
+| 1    | 홍길동 |
+| 4    | 비망록 |
+
+
+
+id 값이 존재하지 않는것은 where에 아무것도 없다는 것을 명기해줘야 한다. (Null=None)
+
+```
+select id, name from information where id is null;
+```
+결과
+
+| id   | name   |
+| ---- | ------ |
+|      | 정몽길 |
+
+
+
+id 값이 존재하지 않는것 이외의 값만 가져온다 
+
+```
+select id, name from information where id is not null;
+```
+
+결과
+
+| id   | name   |
+| ---- | ------ |
+| 1    | 홍길동 |
+| 2    | 장길산 |
+| 2    | 장길산 |
+| 4    | 비망록 |
+
+
+
+검색할때 주로 쓰이는 where like (홍길동 들어간 것만 찾아줘)
+
+```
+select id, name from information where name = '홍길동';
+
+select id, name from information where name like '홍길%';
+```
+
+| id   | name   |
+| ---- | ------ |
+| 1    | 홍길동 |
+
+
+
+길 이 들어가 있는 것은 모두 테이블에 가져오고 싶어
+
+```
+select id, name from information where name like '%길%';
+```
+결과
+
+| id   | name   |
+| ---- | ------ |
+| 1    | 홍길동 |
+| 2    | 장길산 |
+| 2    | 장길산 |
+|      | 정몽길 |
+
+
+
+###  - DELETE
+
+**중요!**
+
+**WHERE문 안쓰고 삭제하면 전체 삭제 됨**
+
+**WHERE문 같이 써서  특정 row의 값을 삭제하기**
+
+**어느 테이블의 어디 를 삭제**
+
+
+
+순서
+
+1. 셀렉트로 지우길 원하는 부분 확인 먼저( id 가 null값만 삭제)
+
+```
+select id, name from information where id is null;
+```
+
+2. 딜리트로 원하는 부분만 삭제
+
+```
+delete from information where id is null;
+```
+
+3. 제대로 됬는지 확인
+
+```
+select id, name from information;
+```
+
+
+
+`길`만 들어가있는 row 삭제 후 확인
+
+```
+delete from information where name like '%길%';
+```
+
+```
+select id, name from information ;
+```
+
+ 
+
+내용만 전체 삭제
+
+```
+delete from information ;
+```
+
+
+
+테이블 자체 드랍 (=엑셀 시트 삭제하는 것과 같은 것 )
+
+```
+drop table information;
+```
+
+
+
+### db browser 에서 table 리로드 하면 information 삭제 된 것 확인 가능 끝
+
+----------------------------------------
+
+참고 : .ignore에서 db.sqlite3를 주석처리 해두면 깃허브에 안올라가게 만들 수 있다 
+
+
+
+엑셀의 내용 
+
+​	creat table: members
+
+​	columns: id, name, age, address, salary
+
+| id   | name  | age  | address    | salary |
+| ---- | ----- | ---- | ---------- | ------ |
+| 1    | Paul  | 32   | California | 20000  |
+| 2    | Allen | 25   | Texas      | 15000  |
+| 3    | Teddy | 23   | Norway     | 20000  |
+| 4    | Mark  | 25   | Rich-Mond  | 65000  |
+| 5    | David | 27   | Texas      | 85000  |
+| 6    | Kim   | 22   | South-Hall | 45000  |
+| 7    | James | 24   | Houston    | 10000  |
+| 8    | James | 35   | Texas      | 40000  |
+
+
+
+`엑셀의 내용` 을 `테이블`로 만들기 
+
+```
+create table members(
+    id real,
+    name text,
+    age real,
+    address text,
+    salary real
+);
+
+insert into members(id, name, age, salary, address)
+    values(1,'Paul',32,20000,'California');  
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (2, 'Allen', 25, 'Texas', 15000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (5, 'David', 27, 'Texas', 85000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (6, 'Kim', 22, 'South-Hall', 45000.00 );
+INSERT INTO members VALUES (7, 'James', 24, 'Houston', 10000.00 );
+INSERT INTO members VALUES (8, 'James', 35, 'Texas', 40000.00 );
+
+```
+
+
+
+선별적으로 내가 원하는 컬럼만 뽑아확인 (id. name, age 만 보여줘)
+
+```
+select id,name,age from members;
+```
+
+
+
+입력한  row가 몇개인지 카운트 
+
+```
+select count(*) from members;
+```
+
+
+
+* 모든 내용에서 name에  d들어가는 모든 내용 다 가져오고 싶어
+
+```
+select * from members where name like '%d%';
+```
+
+결과
+
+| id   | name  | age  | address | salary |
+| ---- | ----- | ---- | ------- | ------ |
+| 3    | Teddy | 23   | Norway  | 20000  |
+| 5    | David | 27   | Texas   | 85000  |
+
+
+
+* 모든 내용에서 age에 25세 이상인 것 다 가져올래 
+
+```
+select * from members where age >= 25;
+```
+
+결과
+
+| id   | name  | age  | address    | salary |
+| ---- | ----- | ---- | ---------- | ------ |
+| 1    | Paul  | 32   | California | 20000  |
+| 2    | Allen | 25   | Texas      | 15000  |
+| 4    | Mark  | 25   | Rich-Mond  | 65000  |
+| 5    | David | 27   | Texas      | 85000  |
+| 8    | James | 35   | Texas      | 40000  |
+
+레코드의 갯수만 보고싶을땐 (판다스에서 불러온 행의 갯수와 ,디비 행의 갯수 비교 하는것 때문에 확인 함)
+
+```
+select count(*) from members where age >= 25;
+```
+
+결과 
+
+```
+5
+```
+
+
+
+* 나이가 25이면서 이름이 d인사람을 찾고 싶어(and조건은 앞뒤 둘다 조건에 맞아야지만 값이 뽑힘)
+
+```
+select * from members where age >= 25 and name like '%d%';
+```
+
+결과
+
+| id   | name  | age  | address | salary |
+| ---- | ----- | ---- | ------- | ------ |
+| 5    | David | 27   | Texas   | 85000  |
+
+
+
+### 데이터 가져와서 db에 넣기
+
+ (루트에 scrapping 디랙토리 생성)
+
+#### sqlwithpandas.py
+
+```python
+#1. 데이터를 db에 넣기
+#sklearn에서 dataset 가져와서
+from sklearn import datasets
+boston = datasets.load_boston()
+
+#dataset을 pandas로 변형
+import pandas as pd
+df = pd.DataFrame(boston['data'],columns=boston['feature_names'])
+
+#변형된 데이터들을 db에 넣기
+import sqlite3
+#루트에 있는 db.sqlite3 파일을을열어준다
+connect = sqlite3.connect('../db.sqlite3')
+# db에 저장하기: to_sql('테이블명')
+# if_exists='replace' 테이블이 없으면 자동으로 만들어지게 하는 경우
+df.to_sql('boston_table', connect, if_exists='replace')
+
+```
+
+#### console
+
+* break point : import pandas as pd
+
+`>>>` boston.target   |  우리가 넣을 y값 확인
+
+`>>>` boston.feature_names  |  어레이 의 컬럼을 확인 가능 
+
+`>>>` data = boston.data  |  보스톤의 데이터를 변수 데이터에 담음 
+
+`>>>` data.shape  | 레코드가 506 컬럼이 13 이라는 것 확인 가능  (506, 13)
+
+* break point : import sqlite3
+
+`>>>` df.head(5)
+
+`>>>`df.describe
+
+* break point : df.to_sql('boston_table', connect, if_exists='replace')
+
+* break point : print(df)
+
+db browser에서 table 리로드해서 boston_table 생성 된 것 확인
+
+
+
+#### sqlwithpandas.py
+
+```python
+#1. 데이터를 db에 넣기
+#sklearn에서 dataset 가져와서
+from sklearn import datasets
+boston = datasets.load_boston()
+
+#dataset을 pandas로 변형
+import pandas as pd
+df = pd.DataFrame(boston['data'],columns=boston['feature_names'])
+
+#변형된 데이터들을 db에 넣기
+import sqlite3
+connect = sqlite3.connect('../db.sqlite3')#루트에 있는 db.sqlite3 파일을을열어준다
+df.to_sql('boston_table', connect, if_exists='append')#db에 저장하기: to_sql('테이블명')
+# if_exists='append' 테이블에 레코드를 계속해서 추가해줄 때 옵션 바꾸기
+
+print(df)
+
+connect.close()
+
+```
+
+#### 
+
+dbbrowser에서 계속 추가되는지 확인
+
+```
+select count(*) from boston_table;
+```
+
+결과(2번 run한 것)
+
+1012
+
+
+
+### 연습 iris
+
+iristosql.py
+
+```python
+from sklearn import datasets
+iris = datasets.load_iris()
+
+import pandas as pd
+df= pd.DataFrame(iris['data'],columns=iris['feature_names'])
+
+import sqlite3
+connect = sqlite3.connect('../db.sqlite3')
+df.to_sql('iris_table', connect, if_exists='append')
+
+print(df)
+
+connect.close()
+```
+
+
+
+### db에서 데이터 불러오기
+
+**read_sqlfrommembers.py**
+
+```python
+#db에서 데이터 불러오기
+
+import sqlite3
+connect = sqlite3.connect('../db.sqlite3')
+
+import pandas as pd
+#sql_query 테이블 안에 건드리는 쿼리문(시퀄) 사용
+df = pd.read_sql_query('select * from members where age>=25',connect)
+
+connect.close()
+
+```
+
+**console**
+
+* break point : import pandas as pd
+
+`>>>` df.head(5)
+
+`>>>` df
+
+
+
+## 그룹바이
+
+members table
+
+```
+delete from members;
+
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (1, 'Paul', 22, 'California', 20000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (2, 'Allen', 27, 'Texas', 15000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+		VALUES (5, 'David', 27, 'Texas', 85000.00 );
+INSERT INTO members (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (6, 'Kim', 22, 'South-Hall', 45000.00 );
+INSERT INTO members VALUES (7, 'James', 22, 'Houston', 10000.00 );
+INSERT INTO members VALUES (8, 'James', 35, 'Texas', 40000.00 );
+
+select * from members;
+```
+
+
+
+| id   | name  | age  | address    | salary |
+| ---- | ----- | ---- | ---------- | ------ |
+| 1    | Paul  | 22   | California | 20000  |
+| 2    | Allen | 27   | Texas      | 15000  |
+| 3    | Teddy | 23   | Norway     | 20000  |
+| 4    | Mark  | 25   | Rich-Mond  | 65000  |
+| 5    | David | 27   | Texas      | 85000  |
+| 6    | Kim   | 22   | South-Hall | 45000  |
+| 7    | James | 22   | Houston    | 10000  |
+| 8    | James | 35   | Texas      | 40000  |
+
+
+
+* id 로 그룹바이 
+
+```
+select * from members group by id;
+```
+
+결과
+
+| id   | name  | age  | address    | salary |
+| ---- | ----- | ---- | ---------- | ------ |
+| 1    | Paul  | 22   | California | 20000  |
+| 2    | Allen | 27   | Texas      | 15000  |
+| 3    | Teddy | 23   | Norway     | 20000  |
+| 4    | Mark  | 25   | Rich-Mond  | 65000  |
+| 5    | David | 27   | Texas      | 85000  |
+| 6    | Kim   | 22   | South-Hall | 45000  |
+| 7    | James | 22   | Houston    | 10000  |
+| 8    | James | 35   | Texas      | 40000  |
+
+
+
+* name 기준으로 그룹바이
+
+```
+select * from members group by name;
+```
+
+결과 james 로 합쳐지긴 했는데 먼저 나온 레코드로 보여짐
+
+| id    | name      | age    | address     | salary    |
+| ----- | --------- | ------ | ----------- | --------- |
+| 2     | Allen     | 27     | Texas       | 15000     |
+| 5     | David     | 27     | Texas       | 85000     |
+| **7** | **James** | **22** | **Houston** | **10000** |
+| 6     | Kim       | 22     | South-Hall  | 45000     |
+| 4     | Mark      | 25     | Rich-Mond   | 65000     |
+| 1     | Paul      | 22     | California  | 20000     |
+| 3     | Teddy     | 23     | Norway      | 20000     |
+
+이런 문제가 생길 수 있어서 카운트 사용해서 그룹 바이 함
+
+```
+select name, count(name), sum(salary) from members group by name;
+```
+
+| name  | count(name) | sum(salary) |
+| ----- | ----------- | ----------- |
+| Allen | 1           | 15000       |
+| David | 1           | 85000       |
+| James | 2           | 50000       |
+| Kim   | 1           | 45000       |
+| Mark  | 1           | 65000       |
+| Paul  | 1           | 20000       |
+| Teddy | 1           | 20000       |
+
+
+
+* age 기준으로 그룹바이
+
+```
+select age, count(age), sum(salary) from members group by age;
+```
+
+결과
+
+| age  | count(age) | sum(salary) |
+| ---- | ---------- | ----------- |
+| 22   | 3          | 75000       |
+| 23   | 1          | 20000       |
+| 25   | 1          | 65000       |
+| 27   | 2          | 100000      |
+| 35   | 1          | 40000       |
+
+
+
+## 활용
+
+스크레핑 기사를 db에 담기 
+
+1. 동작 시켜 DB에 값 저장 
+
+2. pandas.read_sql_query() 로 값을 불러옴 
+   *  where 조건  검색 내용 :` 마스크 , 노동 , 소득 ` 키워드로 dataframe 만들기
+   * select count 와 pandas info() 을 비교해서 확인  
+3. 각 dataframe을 DB table로 저장 
+
+1,2,3 테이블이 각각 생성됨 
+
+
+
+daum_economic_scrapping.py
+
+```python
+from bs4 import BeautifulSoup
+import requests
+
+res = requests.get('http://media.daum.net/economic/')
+
+import sqlite3
+if res.status_code == 200:
+    soup = BeautifulSoup(res.content, 'html.parser')
+    links = soup.select('a.link_txt')
+    # with sqlite3.connect('./db.sqlite3') as conn
+    connect = sqlite3.connect('../db.sqlite3')
+    cursor = connect.cursor()
+
+    for link in links:
+        title = str.strip(link.get_text())
+        href = str.strip(link.get('href'))
+        try:
+            cursor.execute(
+                "insert into polls_economics(create_date, href, title) values(datetime('now'), ?, ?)", (href,title))
+            print(title, ' : ', href)
+        except:
+            pass
+
+    connect.commit()
+```
+
+
+
