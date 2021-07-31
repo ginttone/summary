@@ -64,7 +64,7 @@ migrate 생성 명령어를 입력한다 	`>` **python manage.py migrate**
 
 # Tables 의 auth_user 로 로그인 관리 해보기
 
-##  7. DB 와 SQL lite 
+##  방법1. DB 와 SQL lite 
 
 오늘의 목표 : 접근해서 값 가져와서, 화면에 디스플레이 하기
 
@@ -295,7 +295,7 @@ values (
 
 -------------------------------------------
 
-
+## 방법2.
 ### 시작
 
 Terminal -> **python manage.py createsuperuser**
