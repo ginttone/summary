@@ -270,25 +270,25 @@ if res.status_code == 200 : #200정상
 
 * 잘 작동하는지 확인 (어떻게 작동하는지  보면 됨 생략가능)
 
-debug실행 concole 에서 
+**debug concole** 
 
-type(res) -> 형태가 리퀘스트인 것 확인 가능
+`>>>` type(res) |  형태가 리퀘스트인 것 확인 가능
 
-res.status_code ->200 확인 가능
+`>>>` res.status_code | 200 확인 가능
 
 F9 누르면서 어떻게 돌아가고 있는지 확인 
 
-type(soup)->BeautifulSoup확인 가능
+`>>>` type(soup) | BeautifulSoup확인 가능
 
-해석안된 부분은 error나옴
+      해석안된 부분은 error나옴
 
-type(links)->bs4 = ResultSet
+`>>>` type(links) | bs4 = ResultSet
 
-list 에서 값을 뽑을 때는 links[0]
+`>>>` links[0] | list 에서 값을 뽑을 때
 
 다시 디버깅
 
-len(links) ->135개 들어온것 확인 가능
+`>>>` len(links) | 135개 들어온것 확인 가능
 
 최종 수정 
 
