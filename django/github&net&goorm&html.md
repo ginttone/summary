@@ -2,27 +2,26 @@
 
 VCS -> Get from Version Control 
 
-노랑색:  git repository url code입력
+사진 속 노랑색:  git repository url code입력
 
-분홍색: 내 컴퓨터 어느 위치에 clone할건지 위치선택
+사진 속 분홍색: 내 컴퓨터 어느 위치에 clone할건지 위치선택
 
 ![](md-images/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202021-07-09%20115513-1625799411823.jpg)
 
-### - multi_django= route 
 
-manage.py = .git
+multi_django 는 route 이고 `,` manage.py 는 .git 과 유사하다
 
-### - Terminal 
-
-django-admin startproject web_config ./
-
-### - Debuging mode 띄우기
+Terminal - **django-admin startproject web_config ./**
 
 
+----------
 
-# multi_machinelearning (new open)
 
-## route에 new python file 생성
+# Debuging mode
+
+multi_machinelearning 새로 오픈한다
+
+route(multi_machinelearning)에 new python file(0709.py) 생성
 
 0709.py
 
@@ -33,7 +32,7 @@ second=8
 sum=first+secon
 ```
 
-- Debuging mode 
+* Debuging mode 사용
 
 궁금한 부분보려면 break point건다(사진: 빨간 점 부분)
 
@@ -60,19 +59,27 @@ second=8
 sum = sum(first,second)
 ```
 
+----------
 
 
-# django 로 debuging mode열기
+# django 의 manage.py를 debuging mode 실행
 
-## - manage.py 
 
-중계기역할 환경파일로 토스하는애
+역할
 
-#### 실행
+manage.py 는 중계기 역할을 한다(환경파일로 토스하는 역할)
 
-- run
 
-- debug
+실행하는 방법
+
+manage.py 를 실행하는 방법은 크게 두가지가 있다 
+
+1. run
+
+2. debug
+
+
+manage.py를 실행시키려면 아래와 같이 한다.
 
   
 
@@ -90,24 +97,32 @@ sum = sum(first,second)
 
 ![](md-images/%EB%9F%B0%EC%84%9C%EB%B2%84%ED%9B%84-1625808285477.png)
 
-### -Terminal
 
-python manage.py startapp home
+----------
 
+# startapp (웹서버 브라우저 만들기)
 
-
-### -multi_django>home>views 
-
-```tex
-클라이언트가 요청하면 변수request(ip와 정보)로 받아서 웹서버에 던저준다.
-날아온것을 가지고 웹서버는 어디에있는지 찾아서 끄집어내서 다시 클라이언트에게 응답response해준다. 이때, 웹서버가 끄집어낸 것을 상대가 보기 편하게 변경시키고 보내줘야한다.클라이언트가 이해하기 편하게 HTML, CSS,JAVA같은거로 보기쉽게 바꿔서 네트워크로 보내준다.
-```
+Terminal - **python manage.py startapp home**
 
 
+multi_django `>` home `>` views 
 
-#### views.py 오픈
+
+상황:
+
+클라이언트(uri)가 요청(request)하면 변수request(ip와 정보)로 받아서 웹서버(html)에 던저준다(manage.py).
+
+날아온 것을 가지고 웹서버는 어디에있는지 찾아서 끄집어내서 다시 클라이언트에게 응답response해준다. 
+
+이때, 웹서버가 끄집어낸 것을 상대가 보기 편하게 변경시키고 보내줘야한다.
+
+클라이언트가 이해하기 편하게 HTML, CSS,JAVA같은거로 보기쉽게 바꿔서 네트워크로 보내준다.
+
+
+## views.py 의 역할
 
 uri가 해당 펑션을 요청한다. veiws에서는 기능별로 분리하기 편하게 펑션을 사용해준다
+
 
 ```python
 from django.http import HttpResponse
@@ -122,19 +137,19 @@ def index(request):
     return HttpResponse(resultstr)
 ```
 
+해석:
 
+def 펑션에 담은 index를 불러줘 클라이언트가 요청한거를 `(request)`로 받았다. 
 
-펑션에 담은 index를 불러줘 클라이언트가 요청한거를 request로 받앗어. 
-
-클라이언트 잘보라고 html 로 만들어주고   resultstr 를 리턴받는다 
+클라이언트 잘보라고 html 로 만들어주고  resultstr 을 리턴받는다 
 
 응답해줄땐 HttpResponse을 써.
 
 
 
-#### web_config >urls.py 오픈
+## web_config `>` urls.py 역할
 
-구분자 ,어느평션을 찾아가야할지 힌트 주는 곳
+구분자. `,` 어느 평션을 찾아가야 할지 힌트 주는 곳
 
 ```python
 from django.contrib import admin
@@ -148,27 +163,34 @@ urlpatterns = [
 ]
 ```
 
-이쪽 uri를 저쪽에 보내줌 보내는것을 path라고 함
+해석:
 
-url인 127.0.0.1:8000와 127.0.0.1:8000/home 이 'home' 으로 들어가게됨 
+`from home import views` 나 `views`사용 할게 
 
-`from home import views` 나 views사용할게 
+` path('home',views.index)`
+
+이쪽 uri `'home'` 를 저쪽 `index` 에 보내줘`path`. 
+
+`->` uri 인 127.0.0.1:8000와 127.0.0.1:8000/home 이 'home' 으로 들어가게 됨 
 
 ![](md-images/%EC%93%B0%EA%B8%B0-1625815877524.png)
 
 
 
-views.py에서 breakpoint 부분실행해주면 브라우저화면에 `'<h1>안녕하세요. 김주희 입니다.</h1>'`뜨는 것 확인하면 끝~
+views.py에서 breakpoint 부분실행해주면 브라우저화면에 `'<h1>안녕하세요. 김주희 입니다.</h1>'`뜨게된다.
 
 
 
-#### web_config> settings.py 오픈
+## web_config `>` settings.py 역할
 
 여기에는 대부분 환경설정 내용이 다 들어있다 
 
-ALLOWED_HOSTS에 누구나 다사용할 수 있게 설정
 
-TEMPLATES
+설정:
+
+ALLOWED_HOSTS uri를 누구나 다 사용할 수 있게 설정 `*`
+
+TEMPLATES 연동했다고 써주기 `'DIRS':[os.path.join(BASE_DIR,'templates')],`
 
 ```python
 ALLOWED_HOSTS = ['*']
@@ -183,7 +205,7 @@ TEMPLATES = [
 
 
 
-### route에 template folder만들기 > index.html 생성
+## route(project)에 templates `>` index.html 생성
 
 ```html
 <!DOCTYPE html>
@@ -200,13 +222,12 @@ TEMPLATES = [
 
 
 
-### views.py 에 추가해줌 
+## views.py 에 index01 추가 
 
-클라이언트에게 가는게 아니라 내부 애한테 보내느거라 render씀 
+클라이언트에게 가는게 아니라 내부 애한테 보내는거라 render 씀 
 
 렌더링 하는 html에서 변수를 골라 쓸 수 있어
 
-context : html을 다이네믹 하게 변경시켜주는 변수
 
 ```python
 def index01(request):
@@ -216,11 +237,13 @@ def index01(request):
     return render(request, 'index.html',context=result)
 ```
 
+해석:
+
+context : html을 다이네믹 하게 변경시켜주는 변수
 
 
-### index.html추가
+## index.html 사용
 
-변수이름을 딕셔너리에 담아 표현해줌 {{}}
 
 ```html
 <!DOCTYPE html>
@@ -236,9 +259,13 @@ def index01(request):
 </html>
 ```
 
+해석:
+
+변수이름을 딕셔너리에 담아 표현해줌 {{}}
 
 
-### urls 추가
+
+## urls 에 index02 추가
 
 ```html
 urlpatterns = [
@@ -250,10 +277,10 @@ urlpatterns = [
 ```
 
 
+#  get방식 , post방식으로 보내기
 
-##  get방식 , post방식으로 보내기
 
-#### views.py추가
+## views.py에 index02 추가
 
 get은 클라이언트가 보내온 값을 가지고 내부에서 쓸수잇게 함 
 
@@ -263,7 +290,7 @@ def index02(request):
     return render(request, 'index.html',context=result)
 ```
 
-#### urls.py추가
+## urls.py에 index02 추가
 
 ```python
 urlpatterns = [
@@ -275,33 +302,37 @@ urlpatterns = [
 ]
 ```
 
+----------
 
 
-### commit
+# pycharm에서 python 작업 한 것 github 에 commit 할 때 환경파일 올라가지 않게 설정
 
 unversioned Files > .gitignore 오픈
 
 환경파일인  `.idea/*.xml` `.idea/*.iml`  추가해서 해당확장자 커밋되지 않도록 하고 연필모양 눌러서 저장
 
 
-
 .py 파일들과 .gitignore 만 체크하고 commit push
 
 
 
-# Github로 이동
+## Github로 이동
 
 commit push 잘됫는지 확인 
 
-이것을 제 3자가 볼수있게 goorm사용
-
-#### Terminal
-
-python manage.py migrate
+이것을 제 3자가 볼수있게 **goorm사용**
 
 
+Terminal - **python manage.py migrate**
 
-# Goorm 로그인
+
+
+----------
+
+
+# Goorm 사용 
+
+## Goorm 과 Github 연동
 
 - IDE클릭
 
@@ -328,34 +359,34 @@ python manage.py migrate
         - 만들기 클릭 
 
           
+----------
 
 
-
-# 네트워크의 이해
+# NET 네트워크의 이해
 
 ## port 란 무엇인가?
 
-#### 준비
+* 준비
 
-- CMD 창 3개 오픈 ,탐색기 창 1개오픈
-
-- Develops폴더 안에 port_test폴더 만들고
+    * CMD 창 3개 오픈 ,탐색기 창 1개오픈
+    
+    * Develops폴더 안에 port_test폴더 만들고
 
    note01, note02,note03 folder생성하고
 
   각 폴더에 test01,test02,test03  txt문서 만들어 넣기
 
-### CMD
+* CMD
 
-#### 창1
+
+    * 창1
 
 cd C:\Develops\port_test\note01
 
 jupyter notebook --port=7775
 
 
-
-#### 창2
+    * 창2
 
 cd C:\Develops\port_test\note02
 
@@ -363,7 +394,7 @@ jupyter notebook --port=7776
 
 
 
-#### 창3
+    * 창3
 
 cd C:\Develops\port_test\note03
 
@@ -371,13 +402,13 @@ jupyter notebook --port=7777
 
 
 
-#### 창4 
+    * 창4 
 
 jupyter notebook --port=7777
 
 
 
-### 결과: port는 서버띄울때 --port=값 , 포트 값이 같은것은 쓸수 없다 . 창4는 자동으로 7778로 되서 사용가능.
+** 결과: port는 서버띄울때 --port=값 , 포트 값이 같은것은 쓸수 없다 . 창4는 자동으로 7778로 되서 사용가능.**
 
 ![](md-images/%ED%8F%AC%ED%8A%B8-1625810271464.png)
 
@@ -393,6 +424,8 @@ jupyter notebook --port=7777
 
 외부사람이 내 서버에 접속하게 만들려면 브라우저에서 사용되는 myip주소를 확인해서 알려주어야 한다. 
 
+
+----------
 
 
 # web server (프론트 & 백엔드)
