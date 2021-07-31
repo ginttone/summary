@@ -1,6 +1,6 @@
 # 개인 정리 하는 곳
 
-django 폴더 들어가면
+## django 폴더 들어가면
 
 DB_with_Python.md  디비를 파이선에서 어떻게 쓰는지
 
