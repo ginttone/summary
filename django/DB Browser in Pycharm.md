@@ -274,15 +274,15 @@ if res.status_code == 200 : #200정상
 
 `>>>` type(res) |  형태가 리퀘스트인 것 확인 가능
 
-`>>>` res.status_code | 200 확인 가능
+`>>>` res.status_code | 200 확인
 
 F9 누르면서 어떻게 돌아가고 있는지 확인 
 
-`>>>` type(soup) | BeautifulSoup확인 가능
+`>>>` type(soup) | BeautifulSoup
 
       해석안된 부분은 error나옴
 
-`>>>` type(links) | bs4 = ResultSet
+`>>>` type(links) |  bs4.element.ResultSet
 
 `>>>` links[0] | list 에서 값을 뽑을 때
 
