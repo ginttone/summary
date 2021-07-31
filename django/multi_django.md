@@ -211,7 +211,7 @@ Running migrations:
 
 (아래는 0715 수정예정)
 
-## 7. select 문으로 유무 확인 
+## select 문으로 유무 확인 
 
 * schemas->  tables오른쪽 클릭 reload 하면 tables(12)가 됨
 
@@ -231,7 +231,7 @@ values (
 * polls_question->extract-> select
 
 
-## - github & pycharm clone
+# github & pycharm clone 
 
 VCS -> Get from Version Control 
 
@@ -628,7 +628,7 @@ jupyter notebook --port=7777
 
 
 
-# web server
+# web server (프론트 & 백엔드)
 
 
 
