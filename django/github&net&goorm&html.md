@@ -426,9 +426,35 @@ jupyter notebook --port=7777
 
 ## 파일 위치 찾기(상대경로 , 절대경로)
 
-루트에 폴더 1 안에 폴더 2 안에 파일a가 있다.
+1. 루트에 폴더 1 안에 폴더 2 안에 파일a가 있다.
 
 ../../폴더 2/ 파일a
+
+2. multi_django `>` scrapping `>` daum_economic_scrapping.py
+
+import 에 브레이크 포인트 넣고 디버깅 실행 
+
+디버깅 콘솔에서 
+
+import os (위치 찾을때 씀)
+
+os.getcwd() 
+
+하면 경로나옴
+
+3. framework 경로 찾을때
+
+multi_django `>` home '>` views.py
+
+def index(request): 의 path부분에 브레이크 포인트 넣고 manage.py 브라우저 띄우고 디버깅 실행
+
+디버깅 콘솔에서 
+
+import os (위치 찾을때 씀)
+
+os.getcwd() 
+
+하면 경로나옴
 
 ----------
 
