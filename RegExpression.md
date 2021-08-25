@@ -118,5 +118,5 @@ A7.`[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}`
 
 
 ## - 파이선에서 사용하기
-[코렙]()
+[Regular_expression_operations.ipynb](https://github.com/ginttone/summary/blob/master/NLP/Regular_expression_operations.ipynb)
 
