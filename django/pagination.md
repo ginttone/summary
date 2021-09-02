@@ -226,6 +226,67 @@ inner join category_table ct
 on et.id_category = ct.id;
 ```
 
+## 스크레핑 데이터 db에 넣기
+
+```sqlite
+select
+    ped.category,
+    ped.create_date,
+    ped.href,
+    ped.id,
+    ped.public_date,
+    ped.title
+from
+    polls_economics_demmy ped;
+    
+
+insert into public_date_table (
+    public_date)
+values (
+    '20210819')
+;
+
+insert into category_table (
+    category_name)
+values (
+    '정치')
+;
+
+insert into economics_table (
+    create_date,
+    href,
+    id_category,
+    id_public_date,
+    title)
+values (
+    '2021-09-02 04:51:30',
+    'https://news.v.daum.net/v/20210902134147063',
+    1,
+    1,
+    '고승범·정은보 첫 회동.."가계부채·암호화폐 한몸으로 선제 대응"')
+;
+```
+
+
+
+---------
+
+```sqlite
+select * 
+from economics_table et
+	inner join public_date_table pdt
+	on et.id_public_date = pdt.id ;
+
+select * 
+from economics_table et
+    inner join public_date_table pdt
+    on et.id_public_date = pdt.id 
+    inner join category_table ct
+    on et.id_category = ct.id;
+```
+
+
+
 # 스크레핑
 
 ```
