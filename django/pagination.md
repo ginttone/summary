@@ -223,5 +223,37 @@ inner join category_table ct
 on et.id_category = ct.id;
 ```
 
+# 스크레핑
 
+```
+python -m pip install schedule
+```
+
+특정 데이터 테이블에 담은 후 원본은 지운다. 
+
+계속해서 RDB에 차곡차곡 넣어 사용한다.
+
+[scheduling.py](https://schedule.readthedocs.io/en/stable/)
+
+```python
+import schedule
+import time
+
+def job01():
+    print("job01() working...")
+
+def job02(param01,param02):
+    print("job02() working...",param01,param02)
+
+#연습 1분단위지만 연습끝나면 시간단위로 등록
+schedule.every(1).minutes.do(job01)
+#하루에 한번 특정시간에 돌리고 싶을 때
+schedule.every().day.at('14:30').do(job01)
+#펑션의 파라메터를 넘겨줘야 할 때
+schedule.every(1).minutes.do(job02,'p01','p02')
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+```
 
