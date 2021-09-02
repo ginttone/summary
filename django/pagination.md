@@ -140,6 +140,9 @@ templates/board/list_paginator.html
 
 # DB 
 
+![db](https://user-images.githubusercontent.com/83646543/131798955-592eca70-296b-4be4-810b-b55caaf71538.jpg)
+
+
 [DB](https://vuerd.github.io/vuerd/) 는 설계도이다.
 
 png로 저장해서 사용해도됨.
