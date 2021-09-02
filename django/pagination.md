@@ -138,3 +138,90 @@ templates/board/list_paginator.html
 </html>
 ```
 
+# DB 
+
+[DB](https://vuerd.github.io/vuerd/) 는 설계도이다.
+
+png로 저장해서 사용해도됨.
+
+sqlDDL 로 구문저장도 가능
+
+
+
+1. 
+
+ ```sqlite
+CREATE TABLE category_table
+(
+  id            INTEGER NOT NULL,
+  category_name TEXT    NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ ```
+
+
+
+2. 
+
+ ```sqlite
+CREATE TABLE public_date_table
+(
+  id          INTEGER NOT NULL,
+  public_date TEXT    NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ ```
+
+
+
+3. 제약조건이 들어간 테이블 만들기`-` key가 없을 때 (무결성)
+
+ ```sqlite
+CREATE TABLE economics_table
+(
+  id          INTEGER NOT NULL,
+  create_date    TEXT    NOT NULL,
+  href           TEXT    NOT NULL,
+  title          TEXT    NOT NULL,
+  id_category    INTEGER NOT NULL,
+  id_public_date INTEGER NOT NULL,
+  PRIMARY KEY (id),
+   FOREIGN KEY (id_category)
+    REFERENCES public_date_table (id),
+   FOREIGN KEY (id_public_date)
+    REFERENCES public_date_table (id)
+);
+ ```
+
+
+
+----
+
+```python
+insert into economics_table (
+    create_date,
+    href,
+    id_category,
+    id_public_date,
+    title)
+values (
+    ':create_date',
+    ':href',
+    2,
+    3,
+    ':title')
+;
+```
+
+
+
+```sqlite
+select * from economics_table et
+inner join category_table ct
+on et.id_category = ct.id;
+```
+
+
+
