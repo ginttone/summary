@@ -38,4 +38,4 @@
 
 [cos_similarity_tfidfvectorizer.ipynb](https://github.com/ginttone/summary/blob/master/NLP/cos_similarity_tfidfvectorizer.ipynb)
 
-[countvectorizer.ipynb](
+[countvectorizer.ipynb](https://github.com/ginttone/summary/blob/master/NLP/countvectorizer.ipynb)
