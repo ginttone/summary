@@ -8,7 +8,9 @@
 
 - JQUERY
 
+css Select game https://flukeout.github.io/
 
+FlexBox game https://flexboxfroggy.com/#ko
 
 유투브 영상 보며 자기학습 중입니다.
 
