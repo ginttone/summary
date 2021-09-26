@@ -1,4 +1,4 @@
-# CSS2
+# CSS_2
 
 레이아웃 정리 
 
@@ -317,6 +317,10 @@ container 의 콘텐츠의 위치를 바꿔준다.
 ```
 
 ![sticky](md-images/sticky.jpg)
+
+
+
+
 
 
 

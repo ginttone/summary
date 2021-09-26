@@ -1,8 +1,10 @@
 
 
-# CSS[Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
+# CSS_1
 
-## Selector 1
+[Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
+
+## 1.Selector 
 
 <html>
 
@@ -97,7 +99,7 @@ a[href$=".com"]{
 
 ![css1](md-images/css1-16326315055902.jpg)
 
-## Selector 2
+## 2.Selector 
 
 <html>
 
@@ -130,7 +132,7 @@ a[href$=".com"]{
 
 ![red_basic](md-images/red_basic-16326315186663.jpg)
 
-### 1.padding
+### 1)padding
 
 <css>  : in content (콘텐츠 내부 사이즈조절)
 
@@ -168,7 +170,7 @@ padding:20px 40px 50px 60px;
 
 
 
-### 2.margin
+### 2)margin
 
 <css> : outside the content (콘텐츠 밖의 사이즈 조절)
 
@@ -204,7 +206,7 @@ margin: 100px 0px;
 
 
 
-### 3.border
+### 3)border
 
 <css>
 
@@ -229,6 +231,10 @@ border: 2px dashed red;
 ```
 
 ![borders2](md-images/borders2-16326332507329.jpg)
+
+
+
+
 
 [출처](https://youtu.be/gGebK7lWnCk) 드림코딩 by 엘리 : CSS 셀렉터, 기초 이론 정리
 
